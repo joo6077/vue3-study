@@ -5,7 +5,8 @@
 </template>
 
 <script>
-// import  from 'vue'
+/* eslint-disable */
+import { reactive, readonly, toRefs } from 'vue'
 
 export default {
   props: {
@@ -20,8 +21,21 @@ export default {
     }
   },
   setup(props) {
+    const { title } = toRefs(props)
     console.log('props >> ', props.title)
-    console.log('age >> ', props.age);
+    console.log('props toRefs >>', title.value)
+    console.log('age >> ', props.age)
+
+
+    let count = reactive({
+      cnt: 0
+    })
+    let copy = readonly(count)
+    count.cnt++
+    copy.cnt++
+    console.log('reactive >>', count)
+    console.log('readonly >>', copy)
+
   }
   
 }
